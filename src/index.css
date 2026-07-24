@@ -1,13 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
+@config '../tailwind.config.js';
 
 :root {
-  --site-max-width: 1200px;
-  --site-padding: clamp(16px, 4vw, 64px);
-  --section-vertical: clamp(48px, 8vw, 128px);
-  --card-gap: clamp(12px, 2.2vw, 28px);
+  --site-max-width: 1120px;
+  --site-padding: clamp(20px, 4vw, 56px);
+  /* Consistent vertical rhythm between sections (tightened max so sections
+     don't feel cavernous while card internals stay congested). */
+  --section-vertical: clamp(56px, 7vw, 96px);
+  --card-gap: clamp(16px, 2vw, 24px);
   --card-radius: 20px;
-  --card-padding: 28px;
+  --card-padding: clamp(22px, 3vw, 32px);
+  /* Fixed, predictable gap between a section heading and its content. */
+  --heading-gap: clamp(32px, 4.5vw, 52px);
+  --content-measure: 66ch;
   --base-font-size: 16px;
 }
 
@@ -51,7 +57,12 @@ body,
 }
 
 .section-heading {
-  margin-bottom: calc(var(--card-gap) * 2.5);
+  margin-bottom: var(--heading-gap);
+}
+
+/* Constrain running text to a comfortable measure (65-75 chars). */
+.measure {
+  max-width: var(--content-measure);
 }
 
 /* Projects grid & card tuning to control playcard spacing */
@@ -89,7 +100,7 @@ body,
 }
 
 body {
-  background: #020c0e;
+  background: #0a0a0a;
   color: white;
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
@@ -108,12 +119,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(45, 212, 191, 0.3);
+  background: rgba(239, 206, 150, 0.3);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(45, 212, 191, 0.5);
+  background: rgba(239, 206, 150, 0.5);
 }
 
 /* Utility classes */
@@ -126,7 +137,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(45, 212, 191, 0.3);
+  background: rgba(239, 206, 150, 0.3);
   color: white;
 }
 

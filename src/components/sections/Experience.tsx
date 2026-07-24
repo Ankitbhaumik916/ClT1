@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { HudBadge } from '../ui/HudBadge'
+import { SectionHeading } from '../ui/SectionHeading'
 import { GlassCard } from '../ui/GlassCard'
 
 interface ExperienceEntry {
@@ -40,41 +41,54 @@ export function Experience() {
   return (
     <section id="experience" className="section-block">
       <div className="section-shell">
-        <div className="section-heading">
-          <span className="font-mono text-teal-bright">&gt; EXPERIENCE_LOG</span>
-          <h2 className="mt-4 text-[clamp(40px,4vw,48px)] font-display font-light text-white">Experience</h2>
-        </div>
+        <SectionHeading kicker="EXPERIENCE_LOG" title="Experience" />
+      </div>
 
-        <div className="relative pl-8">
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-teal-bright/40" />
-
-          <div className="space-y-12 md:space-y-16">
+      {/* Horizontal scroll-snap timeline */}
+      <div className="section-shell">
+        <div className="-mx-2 snap-x snap-mandatory overflow-x-auto px-2 pb-4">
+          <div className="flex min-w-max gap-5">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: -18 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-                className="relative w-full pl-8"
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="flex w-[300px] shrink-0 snap-start flex-col sm:w-[340px]"
               >
-                <div
-                  className="absolute left-[-9px] top-6 h-4 w-4 rounded-full bg-teal-bright"
-                  style={{ boxShadow: '0 0 12px rgba(45,212,191,0.8)' }}
-                />
+                {/* Year sits above the node */}
+                <div className="mb-2 pl-6 font-mono text-[12px] text-teal-bright">
+                  {exp.date ?? ' '}
+                </div>
 
-                <GlassCard className="w-full p-6 md:p-10">
-                  <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                {/* Ruler-motif connector line with tick marks + node */}
+                <div className="relative mb-5 h-6" aria-hidden="true">
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-3"
+                    style={{
+                      backgroundImage:
+                        'repeating-linear-gradient(to right, rgba(239,206,150,0.30) 0 1px, transparent 1px 12px)',
+                    }}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-px bg-teal-bright/25" />
+                  <div
+                    className="absolute bottom-[-5px] left-6 h-2.5 w-2.5 rounded-full bg-teal-bright"
+                    style={{ boxShadow: '0 0 10px rgba(239,206,150,0.7)' }}
+                  />
+                </div>
+
+                <GlassCard className="flex flex-1 flex-col p-6">
+                  <div className="mb-4">
                     <HudBadge label={exp.badge} />
-                    {exp.date && <span className="text-xs font-mono text-white/60">{exp.date}</span>}
                   </div>
 
-                  <h3 className="mb-1 font-display text-xl text-white">{exp.title}</h3>
-                  <p className="mb-4 font-mono text-sm text-teal-bright">{exp.organization}</p>
+                  <h3 className="font-display text-[19px] leading-snug text-white">{exp.title}</h3>
+                  <p className="mt-1.5 font-mono text-[13px] text-teal-bright">{exp.organization}</p>
 
-                  <div className="space-y-2">
+                  <div className="mt-4 space-y-2.5">
                     {exp.description.map((item, i) => (
-                      <p key={i} className="text-sm text-white/70 font-body">
+                      <p key={i} className="text-[14px] leading-relaxed text-white/70 font-body">
                         {item}
                       </p>
                     ))}

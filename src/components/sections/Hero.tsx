@@ -1,129 +1,123 @@
 import { motion } from 'framer-motion'
 import { HudBadge } from '../ui/HudBadge'
 import { TerminalText } from '../ui/TerminalText'
-import { DnaHelixCanvas } from '../canvas/DnaHelix'
-import { Suspense } from 'react'
+import { GoldRuler } from '../ui/GoldRuler'
+
+/** Single-row bottom ticker: ROLE · FOCUS · BASED IN · CGPA · PROJECTS · AWARDS */
+const glanceItems = [
+  { label: 'Role', value: 'Biotechnology Engineer' },
+  { label: 'Focus', value: 'Molecular Biology · ML' },
+  { label: 'Based in', value: 'Chennai, India' },
+  { label: 'CGPA', value: '8.37' },
+  { label: 'Projects', value: '3' },
+  { label: 'Awards', value: '2' },
+]
 
 export function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center section-block">
-      <div className="section-shell w-full pt-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="flex flex-col gap-6"
-          >
-            <HudBadge label="BIOTECH_ENGINEER.EXE" />
-
-            <h1
-              style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: 'clamp(42px, 5vw, 72px)',
-                fontWeight: 300,
-                lineHeight: 1.1,
-                color: 'white',
-              }}
+    <section id="hero" className="relative flex min-h-screen flex-col">
+      {/* ---- Main area: identity confined to the left third, vertically centered ---- */}
+      <div className="flex flex-1 items-center pt-20 pb-10">
+        <div className="section-shell w-full">
+          <div className="grid w-full gap-8 lg:grid-cols-3">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex flex-col items-start justify-center gap-6 lg:col-span-1"
             >
-              Dithhi Dasgupta
-            </h1>
+              <HudBadge label="BIOTECH_ENGINEER" />
 
-            <p
-              style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '16px',
-                color: 'rgba(255,255,255,0.75)',
-                lineHeight: 1.6,
-              }}
-            >
-              <TerminalText text="Biotechnology Engineer & Research Enthusiast" delay={1200} />
-            </p>
-
-            <p
-              style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '14px',
-                color: 'rgba(255,255,255,0.5)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              📍 Chennai, Tamil Nadu
-            </p>
-
-            <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
-              <button
-                type="button"
+              <h1
                 style={{
-                  padding: '12px 28px',
-                  borderRadius: '999px',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '13px',
-                  color: '#2dd4bf',
-                  background: 'rgba(45,212,191,0.1)',
-                  border: '1px solid rgba(45,212,191,0.4)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s',
-                  letterSpacing: '0.05em',
-                }}
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 0 24px rgba(45,212,191,0.35)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'none'
-                }}
-              >
-                {'>'} view_projects()
-              </button>
-
-              <button
-                type="button"
-                style={{
-                  padding: '12px 28px',
-                  borderRadius: '999px',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '13px',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontSize: 'clamp(44px, 5vw, 68px)',
+                  fontWeight: 300,
+                  lineHeight: 1.03,
+                  letterSpacing: '-0.02em',
                   color: 'white',
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s',
-                  letterSpacing: '0.05em',
                 }}
-                onClick={() => window.open('https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android', '_blank')}
               >
-                {'>'} open_linkedin()
-              </button>
-            </div>
-          </motion.div>
+                Dithhi
+                <br />
+                Dasgupta
+              </h1>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="w-full"
-          >
-            <Suspense fallback={<div className="w-full h-[480px] rounded-2xl border border-white/10 bg-white/5" />}>
-              <DnaHelixCanvas />
-            </Suspense>
-          </motion.div>
-        </div>
+              <p
+                className="font-mono text-teal-bright"
+                style={{ fontSize: 'clamp(13px, 1.5vw, 16px)', minHeight: '1.6em' }}
+              >
+                <TerminalText text="Biotechnology Engineer & Research Enthusiast" delay={900} />
+              </p>
 
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="text-teal-bright">
-            <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
+              <p className="text-[15px] leading-relaxed text-white/65">
+                Bridging wet-lab molecular biology with computational tools — from microbial assays to
+                machine-learning-based disease detection.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="rounded-full border border-teal-bright/40 bg-teal-bright/10 px-6 py-3 font-mono text-[13px] tracking-wide text-teal-bright transition-all hover:bg-teal-bright/20 hover:shadow-[0_0_24px_rgba(239,206,150,0.3)]"
+                >
+                  View Research
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    window.open(
+                      'https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+                      '_blank'
+                    )
+                  }
+                  className="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-mono text-[13px] tracking-wide text-white transition-colors hover:bg-white/10"
+                >
+                  LinkedIn
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right two-thirds intentionally open so the DNA video reads through */}
+            <div className="hidden lg:col-span-2 lg:block" aria-hidden="true" />
           </div>
-        </motion.div>
+        </div>
       </div>
+
+      {/* ---- Bottom: ruler directly above the full-width AT A GLANCE ticker ---- */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.35 }}
+        className="w-full"
+      >
+        <GoldRuler />
+
+        <div
+          className="w-full border-t border-white/10"
+          style={{
+            background: 'rgba(10,10,10,0.5)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+          }}
+        >
+          <div className="flex items-stretch overflow-x-auto">
+            {glanceItems.map((item) => (
+              <div
+                key={item.label}
+                className="flex min-w-[150px] flex-1 flex-col gap-1.5 border-l border-white/10 px-5 py-4 first:border-l-0 sm:px-6"
+              >
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-teal-bright/75">
+                  {item.label}
+                </span>
+                <span className="whitespace-nowrap text-[14px] font-medium text-white/90">
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   )
 }

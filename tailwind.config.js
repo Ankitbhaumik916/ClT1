@@ -13,11 +13,25 @@ export default {
           hover: 'rgba(255,255,255,0.10)',
           strong: 'rgba(255,255,255,0.14)',
         },
+        // NOTE: `teal.*` keys are kept as aliases so existing utility classes
+        // (text-teal-bright, bg-teal-bright/40, …) keep working — they now
+        // resolve to the gold palette below.
         teal: {
-          bright: '#2dd4bf',
-          mid: '#0d9488',
-          dim: '#134e4a',
-          glow: 'rgba(45,212,191,0.25)',
+          bright: '#EFCE96',
+          mid: '#c9a96e',
+          dim: '#a07d3a',
+          glow: 'rgba(239,206,150,0.25)',
+        },
+        gold: {
+          400: '#EFCE96',
+          500: '#c9a96e',
+          600: '#a07d3a',
+        },
+        surface: {
+          900: '#0a0a0a',
+          800: '#1a1a1a',
+          700: '#2a2a2a',
+          600: '#3a3a3a',
         },
         bio: {
           green: '#4ade80',
@@ -25,9 +39,9 @@ export default {
           amber: '#fbbf24',
         },
         dark: {
-          base: '#020c0e',
-          surface: '#041214',
-          card: '#061a1d',
+          base: '#0a0a0a',
+          surface: '#1a1a1a',
+          card: '#2a2a2a',
         }
       },
       fontFamily: {
@@ -37,17 +51,27 @@ export default {
       },
       keyframes: {
         'pulse-ring': {
-          '0%, 100%': { boxShadow: '0 0 12px rgba(45,212,191,0.4), 0 0 30px rgba(45,212,191,0.2)' },
-          '50%': { boxShadow: '0 0 8px rgba(45,212,191,0.2), 0 0 20px rgba(45,212,191,0.1)' },
+          '0%, 100%': { boxShadow: '0 0 12px rgba(239,206,150,0.4), 0 0 30px rgba(239,206,150,0.2)' },
+          '50%': { boxShadow: '0 0 8px rgba(239,206,150,0.2), 0 0 20px rgba(239,206,150,0.1)' },
         },
         'blink': {
           '0%, 49%': { opacity: '1' },
           '50%, 100%': { opacity: '0' },
         },
+        'ticker': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'blink': 'blink 1s step-start infinite',
+        'ticker': 'ticker 12s linear infinite',
+        'spin-slow': 'spin-slow 30s linear infinite',
       },
     },
   },

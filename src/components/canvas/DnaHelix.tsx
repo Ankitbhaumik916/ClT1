@@ -14,7 +14,7 @@ export function DnaHelix() {
     if (prefersReduced) {
       canvas.width = 300
       canvas.height = 520
-      ctx.fillStyle = '#020c0e'
+      ctx.fillStyle = '#0a0a0a'
       ctx.fillRect(0, 0, 300, 520)
       return
     }
@@ -41,8 +41,8 @@ export function DnaHelix() {
 
     const SEQ = [0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1]
     const PAIRS = [
-      { a: '#e91919', b: '#e0810e', aRgb: '233,25,25', bRgb: '224,129,14' },
-      { a: '#1c170e', b: '#4012f8', aRgb: '28,23,14', bRgb: '64,18,248' },
+      { a: '#EFCE96', b: '#e0810e', aRgb: '239,206,150', bRgb: '224,129,14' },
+      { a: '#c9a96e', b: '#a07d3a', aRgb: '201,169,110', bRgb: '160,125,58' },
     ]
 
     let rot = 0
@@ -148,7 +148,7 @@ export function DnaHelix() {
           pts[pts.length - 1].x,
           pts[pts.length - 1].y,
         )
-        const col = strand === 'A' ? '45,212,191' : '167,139,250'
+        const col = strand === 'A' ? '239,206,150' : '160,125,58'
         const g = ctx!.createLinearGradient(0, 28, 0, H - 28)
         g.addColorStop(0, `rgba(${col},${alpha * 0.4})`)
         g.addColorStop(0.25, `rgba(${col},${alpha})`)

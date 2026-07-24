@@ -18,8 +18,8 @@ function MoleculeOrb() {
       <Icosahedron ref={meshRef} args={[1.2, 1]}>
         <meshStandardMaterial
           wireframe
-          color="#2dd4bf"
-          emissive="#2dd4bf"
+          color="#EFCE96"
+          emissive="#EFCE96"
           emissiveIntensity={0.3}
         />
       </Icosahedron>
@@ -36,7 +36,7 @@ export function MoleculeOrbCanvas() {
       performance={{ min: 0.5 }}
     >
       <MoleculeOrb />
-      <pointLight color="#2dd4bf" intensity={1.5} position={[2, 2, 2]} />
+      <pointLight color="#EFCE96" intensity={1.5} position={[2, 2, 2]} />
     </Canvas>
   )
 }

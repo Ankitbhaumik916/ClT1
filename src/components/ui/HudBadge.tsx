@@ -6,9 +6,9 @@ interface HudBadgeProps {
 export function HudBadge({ label, variant = 'default' }: HudBadgeProps) {
   const variants = {
     default: {
-      background: 'rgba(45,212,191,0.12)',
-      border: '1px solid rgba(45,212,191,0.3)',
-      color: '#2dd4bf',
+      background: 'rgba(239,206,150,0.12)',
+      border: '1px solid rgba(239,206,150,0.3)',
+      color: '#EFCE96',
     },
     amber: {
       background: 'rgba(251,191,36,0.12)',

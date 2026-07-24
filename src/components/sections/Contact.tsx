@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { GlassCard } from '../ui/GlassCard'
 import { GlowButton } from '../ui/GlowButton'
+import { SectionHeading } from '../ui/SectionHeading'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
@@ -29,7 +30,7 @@ export function Contact() {
       //   }),
       // })
       // if (!res.ok) throw new Error('Form submission failed')
-      
+
       setStatus('sent')
       setFormData({ name: '', email: '', message: '' })
       setTimeout(() => setStatus('idle'), 4000)
@@ -45,31 +46,37 @@ export function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const inputCls = 'w-full rounded-xl border border-white/10 bg-white/5 px-3 py-3 font-mono text-white placeholder:text-white/40 focus:border-teal-bright/50 focus:outline-none focus:ring-2 focus:ring-teal-bright/20'
+  const inputCls =
+    'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 font-mono text-[14px] text-white placeholder:text-white/40 focus:border-teal-bright/50 focus:outline-none focus:ring-2 focus:ring-teal-bright/20 transition-colors'
 
   return (
     <section id="contact" className="section-block">
       <div className="section-shell">
+        <SectionHeading kicker="CONTACT" title="Let's Work Together" />
+
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mx-auto w-full max-w-[760px]"
+          className="grid grid-cols-1 items-start gap-5 lg:grid-cols-2"
         >
-          <GlassCard className="p-8 sm:p-12">
-            <div className="mb-8 space-y-2">
-              <h2 className="text-4xl md:text-5xl font-mono text-teal-bright">&gt; INITIATE_CONTACT.sh</h2>
-              <p className="text-white/70 font-body">Open to research collaborations, internships & opportunities.</p>
-            </div>
+          {/* ---- Left column: terminal echo block ---- */}
+          <GlassCard className="h-full p-7 sm:p-8">
+            <h3 className="font-mono text-[clamp(20px,2.6vw,28px)] leading-tight text-teal-bright break-words">
+              &gt; INITIATE_CONTACT.sh
+            </h3>
+            <p className="mt-3 text-[15px] text-white/70 font-body">
+              Open to research collaborations, internships &amp; opportunities.
+            </p>
 
-            <div className="mb-8 space-y-4 font-mono text-sm">
+            <div className="mt-7 space-y-3 font-mono text-sm">
               <div className="text-white/70">
                 <span className="text-teal-bright">$ echo $EMAIL</span>
                 <span className="text-white/50"> → </span>
                 <a
                   href="mailto:dids2367@gmail.com"
-                  className="text-white hover:text-teal-bright transition-colors"
+                  className="text-white transition-colors hover:text-teal-bright"
                 >
                   dids2367@gmail.com
                 </a>
@@ -80,7 +87,7 @@ export function Contact() {
                 <span className="text-white/50"> → </span>
                 <a
                   href="tel:+919475542893"
-                  className="text-white hover:text-teal-bright transition-colors"
+                  className="text-white transition-colors hover:text-teal-bright"
                 >
                   +91-9475542893
                 </a>
@@ -99,18 +106,21 @@ export function Contact() {
                   href="https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-teal-bright transition-colors"
+                  className="break-all text-white transition-colors hover:text-teal-bright"
                 >
                   www.linkedin.com/in/dithhi-dasgupta-21b16834a
                 </a>
               </div>
             </div>
 
-            <div className="my-8 h-px bg-gradient-to-r from-teal-bright/20 to-transparent" />
+            <div className="mt-7 h-px bg-gradient-to-r from-teal-bright/20 to-transparent" />
+          </GlassCard>
 
-            <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          {/* ---- Right column: form ---- */}
+          <GlassCard className="h-full p-7 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>
-                <label htmlFor="contact-name" className="block text-xs font-mono text-white/60 mb-2">
+                <label htmlFor="contact-name" className="mb-2 block font-mono text-xs text-white/60">
                   Name
                 </label>
                 <input
@@ -127,7 +137,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="contact-email" className="block text-xs font-mono text-white/60 mb-2">
+                <label htmlFor="contact-email" className="mb-2 block font-mono text-xs text-white/60">
                   Email
                 </label>
                 <input
@@ -144,7 +154,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-mono text-white/60 mb-2">
+                <label htmlFor="contact-message" className="mb-2 block font-mono text-xs text-white/60">
                   Message
                 </label>
                 <textarea
@@ -159,27 +169,29 @@ export function Contact() {
                 />
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <GlowButton type="submit" disabled={status === 'sending'} className="w-full">
                   {status === 'sending' ? 'Sending…' : '> SEND_MESSAGE'}
                 </GlowButton>
               </div>
 
-              <div role="status" aria-live="polite" className="min-h-[24px] text-center text-sm font-mono">
+              <div role="status" aria-live="polite" className="min-h-[24px] text-center font-mono text-sm">
                 {status === 'sent' && (
                   <span className="text-teal-bright">✓ Message sent — I'll reply within a day or two.</span>
                 )}
                 {status === 'error' && (
-                  <span className="text-red-400">Something went wrong. Please email dids2367@gmail.com directly.</span>
+                  <span className="text-red-400">
+                    Something went wrong. Please email dids2367@gmail.com directly.
+                  </span>
                 )}
               </div>
             </form>
           </GlassCard>
-
-          <div className="pt-8 text-center">
-            <p className="text-xs font-mono text-white/40">© 2025 Dithhi Dasgupta</p>
-          </div>
         </motion.div>
+
+        <div className="pt-8 text-center">
+          <p className="font-mono text-xs text-white/40">© 2026 Dithhi Dasgupta</p>
+        </div>
       </div>
     </section>
   )

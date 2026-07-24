@@ -1,97 +1,89 @@
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { HudBadge } from '../ui/HudBadge'
-import { GlassCard } from '../ui/GlassCard'
+import { SectionHeading } from '../ui/SectionHeading'
 
-gsap.registerPlugin(ScrollTrigger)
-
-interface CounterProps {
-  value: number
-  label: string
-}
-
-function Counter({ value, label }: CounterProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isInitialized, setIsInitialized] = useState(false)
-
-  useEffect(() => {
-    const element = ref.current
-    if (!element || isInitialized) return
-
-    const trigger = ScrollTrigger.create({
-      trigger: element,
-      start: 'top 80%',
-      onEnter: () => {
-        gsap.to(element, {
-          innerHTML: value,
-          duration: 1.8,
-          snap: { innerHTML: 0.01 },
-          ease: 'power2.out',
-        })
-        setIsInitialized(true)
-      },
-    })
-
-    return () => trigger.kill()
-  }, [value, isInitialized])
-
-  return (
-    <GlassCard className="p-6 text-center">
-      <div ref={ref} className="text-4xl font-display font-bold text-teal-bright">
-        0
-      </div>
-      <p className="text-xs font-mono text-white/60 mt-2">{label}</p>
-    </GlassCard>
-  )
-}
+const focusAreas = [
+  'Molecular Biology',
+  'Bioinformatics',
+  'Machine Learning',
+  'Microbiology',
+  'Antimicrobial Research',
+]
 
 export function About() {
-  const sectionRef = useRef<HTMLElement>(null)
-
   return (
-    <section id="about" ref={sectionRef} className="section-block">
+    <section id="about" className="section-block">
       <div className="section-shell">
-        <div className="section-heading">
-          <HudBadge label="ABOUT_ME" />
-          <h2 className="mt-4 text-[clamp(40px,4vw,48px)] font-display font-light text-white">Who I Am</h2>
-        </div>
+        <SectionHeading kicker="ABOUT_ME" title="Who I Am" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-16 items-start"
+          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[280px_1fr] lg:gap-16"
         >
-          <div className="flex flex-col items-center gap-6">
-            <GlassCard className="overflow-hidden p-0 w-full aspect-square flex items-center justify-center">
+          {/* Profile + caption */}
+          <div className="mx-auto flex w-full max-w-[280px] flex-col gap-5 lg:mx-0">
+            <div
+              className="aspect-square w-full overflow-hidden rounded-3xl border border-white/10"
+              style={{ background: 'rgba(255,255,255,0.04)' }}
+            >
               <div
-                className="h-full w-full flex items-center justify-center"
-                style={{
-                  clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                }}
+                className="flex h-full w-full items-center justify-center"
+                style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
               >
-                <img 
-                  src="/profile.jpg" 
-                  alt="Dithhi Dasgupta" 
+                <img
+                  src="/profile.jpg"
+                  alt="Dithhi Dasgupta"
                   className="h-full w-full object-cover object-center"
                   loading="lazy"
                 />
               </div>
-            </GlassCard>
+            </div>
+            <div className="text-center lg:text-left">
+              <p className="font-display text-lg text-white">Dithhi Dasgupta</p>
+              <p className="mt-1 font-mono text-[12px] text-teal-bright">Research Intern · SRMIST</p>
+              <p className="mt-1 text-[13px] text-white/50">Chennai, Tamil Nadu, India</p>
+            </div>
           </div>
 
+          {/* Narrative + focus + education */}
           <div className="flex flex-col gap-8">
-            <p className="max-w-3xl text-[16px] leading-8 text-white/80 font-body">
-              I'm a 3rd-year Biotechnology Engineering student at SRMIST, Chennai, currently working as a Research Intern under Dr. Satish Kumar R. My work bridges wet-lab molecular biology with computational tools — from microbial assays to machine learning-based disease detection. I'm driven by the intersection of life sciences and technology.
-            </p>
+            <div className="flex flex-col gap-5">
+              <p className="measure text-[16px] leading-[1.8] text-white/80 font-body">
+                I'm a 3rd-year Biotechnology Engineering student at SRMIST, Chennai, currently working as
+                a Research Intern under Dr. Satish Kumar&nbsp;R. My work bridges wet-lab molecular biology
+                with computational tools — from microbial assays to machine-learning-based disease detection.
+              </p>
+              <p className="measure text-[16px] leading-[1.8] text-white/70 font-body">
+                I'm driven by the intersection of life sciences and technology, and by research that moves
+                from the bench to real therapeutic and diagnostic impact.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Counter value={8.37} label="CGPA (5th Sem)" />
-              <Counter value={3} label="Active Projects" />
-              <Counter value={2} label="Awards Won" />
+            <div>
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/45">
+                Focus areas
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {focusAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="rounded-full border border-teal-bright/25 bg-teal-bright/[0.08] px-4 py-1.5 text-[13px] text-white/85"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-white/8 pt-6 font-mono text-[13px] text-white/55">
+              <span className="text-teal-bright">EDU</span>
+              <span className="text-white/80">B.Tech Biotechnology</span>
+              <span className="text-white/30">·</span>
+              <span>SRMIST Chennai</span>
+              <span className="text-white/30">·</span>
+              <span>2022 – Present</span>
             </div>
           </div>
         </motion.div>
