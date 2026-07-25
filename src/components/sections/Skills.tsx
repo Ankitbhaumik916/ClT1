@@ -69,7 +69,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.08 }}
-              className="flex h-full flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-7 transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)]"
+              className="flex h-full flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-6 transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] sm:p-8"
             >
               <div className="mb-5 flex items-center gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-white">

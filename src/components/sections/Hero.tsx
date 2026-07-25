@@ -66,7 +66,7 @@ export function Hero() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
-              className="mt-5 font-light text-black"
+              className="mt-6 font-light text-black"
               style={{
                 fontSize: 'clamp(2rem, 8vw, 4.5rem)',
                 letterSpacing: '-0.03em',
@@ -85,7 +85,7 @@ export function Hero() {
               initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 1, ease: EASE }}
-              className="mt-7 flex flex-wrap items-center gap-3"
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
               <button
                 type="button"

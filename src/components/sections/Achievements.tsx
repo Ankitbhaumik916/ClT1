@@ -63,7 +63,7 @@ export function Achievements() {
               >
                 <div
                   className={`flex h-full flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] ${
-                    isHero ? 'justify-center bg-[#F4F4F6] p-8 lg:p-10' : 'bg-white p-6'
+                    isHero ? 'justify-center bg-[#F4F4F6] p-8 sm:p-10' : 'bg-white p-6 sm:p-8'
                   }`}
                 >
                   <span
@@ -85,7 +85,7 @@ export function Achievements() {
                   {achievement.subtitle && (
                     <p
                       className={`mt-2.5 leading-relaxed text-black/55 ${
-                        isHero ? 'text-[15px]' : 'text-[13.5px]'
+                        isHero ? 'text-[15px]' : 'text-[14px]'
                       }`}
                     >
                       {achievement.subtitle}

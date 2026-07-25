@@ -59,7 +59,7 @@ export function Contact() {
           className="grid grid-cols-1 items-start gap-5 lg:grid-cols-2"
         >
           {/* ---- Left column: contact details ---- */}
-          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-[#F4F4F6] p-7 sm:p-8">
+          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-[#F4F4F6] p-6 sm:p-8">
             <p className="text-[15px] leading-relaxed text-black/70">
               Open to research collaborations, internships &amp; opportunities.
             </p>
@@ -89,7 +89,7 @@ export function Contact() {
           </div>
 
           {/* ---- Right column: form ---- */}
-          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-7 sm:p-8">
+          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>
                 <label htmlFor="contact-name" className="mb-2 block text-[12px] font-medium text-black/55">

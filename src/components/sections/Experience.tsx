@@ -56,8 +56,8 @@ export function Experience() {
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="flex w-[300px] shrink-0 snap-start flex-col sm:w-[340px]"
               >
-                {/* Year sits above the node */}
-                <div className="mb-2 pl-6 text-[12px] font-medium text-black/55">
+                {/* Year sits above the node (aligned with card content padding) */}
+                <div className="mb-2 pl-6 text-[12px] font-medium text-black/55 sm:pl-8">
                   {exp.date ?? ' '}
                 </div>
 
@@ -71,11 +71,11 @@ export function Experience() {
                     }}
                   />
                   <div className="absolute inset-x-0 bottom-0 h-px bg-black/15" />
-                  <div className="absolute bottom-[-4px] left-6 h-2.5 w-2.5 rounded-full bg-black" />
+                  <div className="absolute bottom-[-4px] left-6 h-2.5 w-2.5 rounded-full bg-black sm:left-8" />
                 </div>
 
-                <div className="flex flex-1 flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-6 transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)]">
-                  <div className="mb-4">
+                <div className="flex flex-1 flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-6 transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] sm:p-8">
+                  <div className="mb-5">
                     <HudBadge label={exp.badge} />
                   </div>
 
@@ -84,7 +84,7 @@ export function Experience() {
                   </h3>
                   <p className="mt-1.5 text-[13px] text-black/55">{exp.organization}</p>
 
-                  <div className="mt-4 space-y-2.5">
+                  <div className="mt-5 space-y-2.5">
                     {exp.description.map((item, i) => (
                       <p key={i} className="text-[14px] leading-relaxed text-black/60">
                         {item}
