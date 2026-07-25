@@ -8,25 +8,20 @@ interface GlowButtonProps {
   className?: string
 }
 
-export function GlowButton({ children, onClick, type = 'button', disabled = false, className = '' }: GlowButtonProps) {
+/** Primary action: solid black pill. */
+export function GlowButton({
+  children,
+  onClick,
+  type = 'button',
+  disabled = false,
+  className = '',
+}: GlowButtonProps) {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`px-8 py-3.5 rounded-full font-mono text-sm tracking-wider text-white transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
-      style={{
-        background: 'rgba(239,206,150,0.15)',
-        border: '1px solid rgba(239,206,150,0.4)',
-      }}
-      onMouseEnter={(e) => {
-        const target = e.currentTarget as HTMLElement
-        target.style.boxShadow = '0 0 25px rgba(239,206,150,0.4)'
-      }}
-      onMouseLeave={(e) => {
-        const target = e.currentTarget as HTMLElement
-        target.style.boxShadow = 'none'
-      }}
+      className={`cursor-pointer rounded-full bg-black px-6 py-3.5 text-[13px] font-medium text-white transition-opacity hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     >
       {children}
     </button>

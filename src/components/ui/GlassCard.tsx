@@ -6,26 +6,12 @@ interface GlassCardProps {
   id?: string
 }
 
+/** Minimal light card: white surface, hairline border, subtle lift on hover. */
 export function GlassCard({ children, className = '', id }: GlassCardProps) {
   return (
     <div
       id={id}
-      className={`group rounded-3xl border border-white/10 transition-all duration-300 ${className}`}
-      style={{
-        background: 'rgba(14,14,14,0.5)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-      }}
-      onMouseEnter={(e) => {
-        const target = e.currentTarget as HTMLElement
-        target.style.borderColor = 'rgba(239,206,150,0.3)'
-        target.style.boxShadow = '0 0 40px rgba(239,206,150,0.1)'
-      }}
-      onMouseLeave={(e) => {
-        const target = e.currentTarget as HTMLElement
-        target.style.borderColor = 'rgba(255,255,255,0.1)'
-        target.style.boxShadow = 'none'
-      }}
+      className={`group rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] ${className}`}
     >
       {children}
     </div>

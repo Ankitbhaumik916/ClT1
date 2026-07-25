@@ -1,5 +1,3 @@
-import { HudBadge } from './HudBadge'
-
 interface SectionHeadingProps {
   kicker: string
   title: string
@@ -8,26 +6,34 @@ interface SectionHeadingProps {
 }
 
 /**
- * One consistent section header used across every section so the kicker badge,
- * title, and optional subtitle share the same rhythm and alignment sitewide.
+ * Consistent section header for the minimal system:
+ * a small dot + kicker label above a light-weight display title.
  */
 export function SectionHeading({ kicker, title, subtitle, align = 'left' }: SectionHeadingProps) {
   return (
     <div
-      className={`section-heading flex flex-col gap-4 ${
+      className={`section-heading flex flex-col ${
         align === 'center' ? 'items-center text-center' : 'items-start'
       }`}
     >
-      <HudBadge label={kicker} />
-      <h2 className="font-display font-light text-white text-[clamp(30px,3.6vw,44px)] leading-[1.12] tracking-tight">
+      <div className="flex items-center gap-2.5">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-black" />
+        <span className="text-[13px] text-black/55">{kicker.replace(/_/g, ' ')}</span>
+      </div>
+
+      <h2
+        className="mt-4 font-light text-black"
+        style={{
+          fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
+          letterSpacing: '-0.03em',
+          lineHeight: 1.05,
+        }}
+      >
         {title}
       </h2>
+
       {subtitle && (
-        <p
-          className={`measure text-white/60 font-body text-[15px] leading-relaxed ${
-            align === 'center' ? 'mx-auto' : ''
-          }`}
-        >
+        <p className={`measure mt-4 text-[15px] leading-relaxed text-black/55 ${align === 'center' ? 'mx-auto' : ''}`}>
           {subtitle}
         </p>
       )}

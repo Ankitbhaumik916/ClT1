@@ -1,121 +1,125 @@
 import { motion } from 'framer-motion'
-import { HudBadge } from '../ui/HudBadge'
-import { TerminalText } from '../ui/TerminalText'
-import { GoldRuler } from '../ui/GoldRuler'
 
-/** Single-row bottom ticker: ROLE · FOCUS · BASED IN · CGPA · PROJECTS · AWARDS */
-const glanceItems = [
-  { label: 'Role', value: 'Biotechnology Engineer' },
-  { label: 'Focus', value: 'Molecular Biology · ML' },
-  { label: 'Based in', value: 'Chennai, India' },
-  { label: 'CGPA', value: '8.37' },
-  { label: 'Projects', value: '3' },
-  { label: 'Awards', value: '2' },
-]
+const EASE = [0.16, 1, 0.3, 1] as const
+
+const tags = ['Molecular Biology', 'Bioinformatics', 'Machine Learning']
 
 export function Hero() {
   return (
-    <section id="hero" className="relative flex min-h-screen flex-col">
-      {/* ---- Main area: identity confined to the left third, vertically centered ---- */}
-      <div className="flex flex-1 items-center pt-20 pb-10">
-        <div className="section-shell w-full">
-          <div className="grid w-full gap-8 lg:grid-cols-3">
+    <section
+      id="hero"
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden bg-white"
+    >
+      {/* ---------- Background video ---------- */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.8, ease: EASE }}
+        className="absolute inset-0 z-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <div className="h-[80%] w-[80%] md:h-full md:w-full">
+          <video
+            src="/hero-bg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover"
+          />
+        </div>
+      </motion.div>
+
+      {/* Spacer so footer content is pushed to the bottom */}
+      <div />
+
+      {/* ---------- Footer content over gradient fade-up ---------- */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5, ease: EASE }}
+        className="relative z-30 w-full"
+        style={{
+          background:
+            'linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.8) 50%, transparent 100%)',
+        }}
+      >
+        <div className="section-shell flex flex-col gap-8 pb-10 pt-24 md:flex-row md:items-end md:justify-between md:gap-12 md:pb-12">
+          {/* Left block */}
+          <div className="flex flex-col">
+            {/* Subtitle */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col items-start justify-center gap-6 lg:col-span-1"
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+              className="flex items-center gap-2.5"
             >
-              <HudBadge label="BIOTECH_ENGINEER" />
-
-              <h1
-                style={{
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontSize: 'clamp(44px, 5vw, 68px)',
-                  fontWeight: 300,
-                  lineHeight: 1.03,
-                  letterSpacing: '-0.02em',
-                  color: 'white',
-                }}
-              >
-                Dithhi
-                <br />
-                Dasgupta
-              </h1>
-
-              <p
-                className="font-mono text-teal-bright"
-                style={{ fontSize: 'clamp(13px, 1.5vw, 16px)', minHeight: '1.6em' }}
-              >
-                <TerminalText text="Biotechnology Engineer & Research Enthusiast" delay={900} />
-              </p>
-
-              <p className="text-[15px] leading-relaxed text-white/65">
-                Bridging wet-lab molecular biology with computational tools — from microbial assays to
-                machine-learning-based disease detection.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <button
-                  type="button"
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-full border border-teal-bright/40 bg-teal-bright/10 px-6 py-3 font-mono text-[13px] tracking-wide text-teal-bright transition-all hover:bg-teal-bright/20 hover:shadow-[0_0_24px_rgba(239,206,150,0.3)]"
-                >
-                  View Research
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    window.open(
-                      'https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
-                      '_blank'
-                    )
-                  }
-                  className="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-mono text-[13px] tracking-wide text-white transition-colors hover:bg-white/10"
-                >
-                  LinkedIn
-                </button>
-              </div>
+              <span className="h-2 w-2 shrink-0 rounded-full bg-black" />
+              <span className="text-[13px] text-black/55">
+                Biotechnology Engineer &amp; Research Enthusiast
+              </span>
             </motion.div>
 
-            {/* Right two-thirds intentionally open so the DNA video reads through */}
-            <div className="hidden lg:col-span-2 lg:block" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
+            {/* Heading */}
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
+              className="mt-5 font-light text-black"
+              style={{
+                fontSize: 'clamp(2rem, 8vw, 4.5rem)',
+                letterSpacing: '-0.03em',
+                lineHeight: 1,
+              }}
+            >
+              <span className="md:text-[clamp(2.5rem,5.5vw,4.5rem)]">
+                Bridging Biology
+                <br />
+                and Computation.
+              </span>
+            </motion.h1>
 
-      {/* ---- Bottom: ruler directly above the full-width AT A GLANCE ticker ---- */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.35 }}
-        className="w-full"
-      >
-        <GoldRuler />
-
-        <div
-          className="w-full border-t border-white/10"
-          style={{
-            background: 'rgba(10,10,10,0.5)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-        >
-          <div className="flex items-stretch overflow-x-auto">
-            {glanceItems.map((item) => (
-              <div
-                key={item.label}
-                className="flex min-w-[150px] flex-1 flex-col gap-1.5 border-l border-white/10 px-5 py-4 first:border-l-0 sm:px-6"
+            {/* Buttons */}
+            <motion.div
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1, ease: EASE }}
+              className="mt-7 flex flex-wrap items-center gap-3"
+            >
+              <button
+                type="button"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-full bg-black px-6 py-3 text-[13px] font-medium text-white transition-opacity hover:opacity-85"
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-teal-bright/75">
-                  {item.label}
-                </span>
-                <span className="whitespace-nowrap text-[14px] font-medium text-white/90">
-                  {item.value}
-                </span>
-              </div>
-            ))}
+                View Research
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="rounded-full border border-[rgba(0,0,0,0.35)] px-6 py-3 text-[13px] font-medium text-black transition-colors hover:bg-black/5"
+              >
+                Get in Touch
+              </button>
+            </motion.div>
           </div>
+
+          {/* Right block: tag pills */}
+          <motion.div
+            initial={{ y: 16, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1, ease: EASE }}
+            className="flex flex-wrap items-center gap-2 md:justify-end"
+          >
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-[rgba(0,0,0,0.12)] bg-white px-4 py-2 text-[11px] font-medium text-black/70"
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </motion.div>
     </section>

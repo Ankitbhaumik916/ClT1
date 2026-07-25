@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { Trophy, Presentation, Zap, Star } from 'lucide-react'
 import { HudBadge } from '../ui/HudBadge'
 import { SectionHeading } from '../ui/SectionHeading'
-import { GlassCard } from '../ui/GlassCard'
 
 interface Achievement {
   icon: React.ReactNode
@@ -46,9 +45,9 @@ export function Achievements() {
   ]
 
   return (
-    <section id="achievements" className="section-block">
+    <section id="achievements" className="section-block bg-white">
       <div className="section-shell">
-        <SectionHeading kicker="ACHIEVEMENT_GALLERY" title="Achievements & Awards" />
+        <SectionHeading kicker="Achievement gallery" title="Achievements & Awards" />
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
           {achievements.map((achievement, idx) => {
@@ -62,11 +61,13 @@ export function Achievements() {
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className={achievement.span}
               >
-                <GlassCard
-                  className={`flex h-full flex-col ${isHero ? 'justify-center p-8 lg:p-10' : 'p-6'}`}
+                <div
+                  className={`flex h-full flex-col rounded-2xl border border-[rgba(0,0,0,0.12)] transition-all duration-300 hover:border-[rgba(0,0,0,0.28)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] ${
+                    isHero ? 'justify-center bg-[#F4F4F6] p-8 lg:p-10' : 'bg-white p-6'
+                  }`}
                 >
                   <span
-                    className={`mb-5 flex shrink-0 items-center justify-center rounded-xl border border-teal-bright/25 bg-teal-bright/10 text-teal-bright ${
+                    className={`mb-5 flex shrink-0 items-center justify-center rounded-full bg-black text-white ${
                       isHero ? 'h-14 w-14' : 'h-11 w-11'
                     }`}
                   >
@@ -74,8 +75,8 @@ export function Achievements() {
                   </span>
 
                   <h3
-                    className={`font-display font-medium leading-snug text-white ${
-                      isHero ? 'text-[24px] lg:text-[28px]' : 'text-[17px]'
+                    className={`font-medium leading-snug tracking-tight text-black ${
+                      isHero ? 'text-[24px] lg:text-[30px]' : 'text-[17px]'
                     }`}
                   >
                     {achievement.title}
@@ -83,7 +84,7 @@ export function Achievements() {
 
                   {achievement.subtitle && (
                     <p
-                      className={`mt-2.5 leading-relaxed text-white/60 font-body ${
+                      className={`mt-2.5 leading-relaxed text-black/55 ${
                         isHero ? 'text-[15px]' : 'text-[13.5px]'
                       }`}
                     >
@@ -94,7 +95,7 @@ export function Achievements() {
                   <div className="mt-5">
                     <HudBadge label={achievement.badge} />
                   </div>
-                </GlassCard>
+                </div>
               </motion.div>
             )
           })}

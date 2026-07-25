@@ -1,20 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import 'tailwindcss';
 @config '../tailwind.config.js';
 
 :root {
-  --site-max-width: 1120px;
-  --site-padding: clamp(20px, 4vw, 56px);
-  /* Consistent vertical rhythm between sections (tightened max so sections
-     don't feel cavernous while card internals stay congested). */
-  --section-vertical: clamp(56px, 7vw, 96px);
-  --card-gap: clamp(16px, 2vw, 24px);
-  --card-radius: 20px;
-  --card-padding: clamp(22px, 3vw, 32px);
-  /* Fixed, predictable gap between a section heading and its content. */
-  --heading-gap: clamp(32px, 4.5vw, 52px);
+  --site-max-width: 1200px;
+  --site-padding: clamp(16px, 4vw, 32px);
+  --section-vertical: clamp(64px, 8vw, 120px);
+  --heading-gap: clamp(32px, 4.5vw, 56px);
   --content-measure: 66ch;
-  --base-font-size: 16px;
+  --line: rgba(0, 0, 0, 0.12);
+  --ink-55: rgba(0, 0, 0, 0.55);
+  --ink-70: rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -36,6 +32,18 @@ body,
   width: 100%;
 }
 
+body {
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .section-shell {
   width: 100%;
   max-width: var(--site-max-width);
@@ -44,10 +52,10 @@ body,
   padding-right: var(--site-padding);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .section-shell {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
@@ -60,84 +68,29 @@ body,
   margin-bottom: var(--heading-gap);
 }
 
-/* Constrain running text to a comfortable measure (65-75 chars). */
 .measure {
   max-width: var(--content-measure);
 }
 
-/* Projects grid & card tuning to control playcard spacing */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--card-gap);
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border-radius: var(--card-radius);
-  padding: var(--card-padding);
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.12);
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 12px 40px rgba(17, 24, 39, 0.45);
-}
-
-.project-tags span {
-  display: inline-block;
-  margin: 0 6px 8px 0;
-}
-
-.section-kicker {
-  margin-bottom: 16px;
-}
-
-body {
-  background: #0a0a0a;
-  color: white;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+/* Minimal light scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(239, 206, 150, 0.3);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(239, 206, 150, 0.5);
+  background: rgba(0, 0, 0, 0.35);
 }
 
-/* Utility classes */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-/* Selection */
 ::selection {
-  background: rgba(239, 206, 150, 0.3);
-  color: white;
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
 }
-

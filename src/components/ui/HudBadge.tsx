@@ -3,38 +3,18 @@ interface HudBadgeProps {
   variant?: 'default' | 'amber' | 'green' | 'violet'
 }
 
+/**
+ * Minimal tag pill. In the black-and-white system all variants render
+ * monochrome; `variant` only drives the small status dot so state stays
+ * readable without introducing colour.
+ */
 export function HudBadge({ label, variant = 'default' }: HudBadgeProps) {
-  const variants = {
-    default: {
-      background: 'rgba(239,206,150,0.12)',
-      border: '1px solid rgba(239,206,150,0.3)',
-      color: '#EFCE96',
-    },
-    amber: {
-      background: 'rgba(251,191,36,0.12)',
-      border: '1px solid rgba(251,191,36,0.3)',
-      color: '#fbbf24',
-    },
-    green: {
-      background: 'rgba(74,222,128,0.12)',
-      border: '1px solid rgba(74,222,128,0.3)',
-      color: '#4ade80',
-    },
-    violet: {
-      background: 'rgba(167,139,250,0.12)',
-      border: '1px solid rgba(167,139,250,0.3)',
-      color: '#a78bfa',
-    },
-  }
-
-  const style = variants[variant]
+  const showDot = variant !== 'default'
 
   return (
-    <span
-      className="font-mono text-xs tracking-[0.2em] uppercase px-3 py-1 rounded-lg inline-block"
-      style={{ ...style }}
-    >
-      [ {label} ]
+    <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(0,0,0,0.12)] bg-white px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-black/70">
+      {showDot && <span className="h-1.5 w-1.5 rounded-full bg-black/45" />}
+      {label.replace(/_/g, ' ')}
     </span>
   )
 }

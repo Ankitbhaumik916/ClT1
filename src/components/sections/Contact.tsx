@@ -1,10 +1,21 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { GlassCard } from '../ui/GlassCard'
 import { GlowButton } from '../ui/GlowButton'
 import { SectionHeading } from '../ui/SectionHeading'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
+
+const contactRows = [
+  { label: 'Email', value: 'dids2367@gmail.com', href: 'mailto:dids2367@gmail.com' },
+  { label: 'Phone', value: '+91-9475542893', href: 'tel:+919475542893' },
+  { label: 'Location', value: 'Chennai, Tamil Nadu, India' },
+  {
+    label: 'LinkedIn',
+    value: 'www.linkedin.com/in/dithhi-dasgupta-21b16834a',
+    href: 'https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    external: true,
+  },
+]
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -17,20 +28,6 @@ export function Contact() {
       // For now, just log to console and show success message
       // To enable email sending, add VITE_WEB3FORMS_KEY to your .env
       console.log('Form submission:', formData)
-      // TODO: Uncomment when ready to use Web3Forms
-      // const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY
-      // const res = await fetch('https://api.web3forms.com/submit', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     access_key: WEB3FORMS_KEY,
-      //     subject: `Portfolio contact from ${formData.name}`,
-      //     from_name: 'Dithhi Dasgupta Portfolio',
-      //     ...formData,
-      //   }),
-      // })
-      // if (!res.ok) throw new Error('Form submission failed')
-
       setStatus('sent')
       setFormData({ name: '', email: '', message: '' })
       setTimeout(() => setStatus('idle'), 4000)
@@ -47,12 +44,12 @@ export function Contact() {
   }
 
   const inputCls =
-    'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 font-mono text-[14px] text-white placeholder:text-white/40 focus:border-teal-bright/50 focus:outline-none focus:ring-2 focus:ring-teal-bright/20 transition-colors'
+    'w-full rounded-xl border border-[rgba(0,0,0,0.12)] bg-white px-4 py-3.5 text-[14px] text-black placeholder:text-black/35 transition-colors focus:border-black focus:outline-none'
 
   return (
-    <section id="contact" className="section-block">
+    <section id="contact" className="section-block bg-white">
       <div className="section-shell">
-        <SectionHeading kicker="CONTACT" title="Let's Work Together" />
+        <SectionHeading kicker="Contact" title="Let's Work Together" />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -61,66 +58,41 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="grid grid-cols-1 items-start gap-5 lg:grid-cols-2"
         >
-          {/* ---- Left column: terminal echo block ---- */}
-          <GlassCard className="h-full p-7 sm:p-8">
-            <h3 className="font-mono text-[clamp(20px,2.6vw,28px)] leading-tight text-teal-bright break-words">
-              &gt; INITIATE_CONTACT.sh
-            </h3>
-            <p className="mt-3 text-[15px] text-white/70 font-body">
+          {/* ---- Left column: contact details ---- */}
+          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-[#F4F4F6] p-7 sm:p-8">
+            <p className="text-[15px] leading-relaxed text-black/70">
               Open to research collaborations, internships &amp; opportunities.
             </p>
 
-            <div className="mt-7 space-y-3 font-mono text-sm">
-              <div className="text-white/70">
-                <span className="text-teal-bright">$ echo $EMAIL</span>
-                <span className="text-white/50"> → </span>
-                <a
-                  href="mailto:dids2367@gmail.com"
-                  className="text-white transition-colors hover:text-teal-bright"
+            <div className="mt-7 flex flex-col">
+              {contactRows.map((row) => (
+                <div
+                  key={row.label}
+                  className="flex flex-col gap-1 border-t border-[rgba(0,0,0,0.12)] py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 >
-                  dids2367@gmail.com
-                </a>
-              </div>
-
-              <div className="text-white/70">
-                <span className="text-teal-bright">$ echo $PHONE</span>
-                <span className="text-white/50"> → </span>
-                <a
-                  href="tel:+919475542893"
-                  className="text-white transition-colors hover:text-teal-bright"
-                >
-                  +91-9475542893
-                </a>
-              </div>
-
-              <div className="text-white/70">
-                <span className="text-teal-bright">$ echo $LOCATION</span>
-                <span className="text-white/50"> → </span>
-                <span className="text-white">Chennai, Tamil Nadu, India</span>
-              </div>
-
-              <div className="text-white/70">
-                <span className="text-teal-bright">$ open $LINKEDIN</span>
-                <span className="text-white/50"> → </span>
-                <a
-                  href="https://www.linkedin.com/in/dithhi-dasgupta-21b16834a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="break-all text-white transition-colors hover:text-teal-bright"
-                >
-                  www.linkedin.com/in/dithhi-dasgupta-21b16834a
-                </a>
-              </div>
+                  <span className="text-[12px] font-medium text-black/45">{row.label}</span>
+                  {row.href ? (
+                    <a
+                      href={row.href}
+                      target={row.external ? '_blank' : undefined}
+                      rel={row.external ? 'noopener noreferrer' : undefined}
+                      className="break-all text-[14px] text-black underline-offset-4 transition-colors hover:underline sm:text-right"
+                    >
+                      {row.value}
+                    </a>
+                  ) : (
+                    <span className="text-[14px] text-black sm:text-right">{row.value}</span>
+                  )}
+                </div>
+              ))}
             </div>
-
-            <div className="mt-7 h-px bg-gradient-to-r from-teal-bright/20 to-transparent" />
-          </GlassCard>
+          </div>
 
           {/* ---- Right column: form ---- */}
-          <GlassCard className="h-full p-7 sm:p-8">
+          <div className="h-full rounded-2xl border border-[rgba(0,0,0,0.12)] bg-white p-7 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>
-                <label htmlFor="contact-name" className="mb-2 block font-mono text-xs text-white/60">
+                <label htmlFor="contact-name" className="mb-2 block text-[12px] font-medium text-black/55">
                   Name
                 </label>
                 <input
@@ -137,7 +109,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="contact-email" className="mb-2 block font-mono text-xs text-white/60">
+                <label htmlFor="contact-email" className="mb-2 block text-[12px] font-medium text-black/55">
                   Email
                 </label>
                 <input
@@ -154,7 +126,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="mb-2 block font-mono text-xs text-white/60">
+                <label htmlFor="contact-message" className="mb-2 block text-[12px] font-medium text-black/55">
                   Message
                 </label>
                 <textarea
@@ -171,26 +143,27 @@ export function Contact() {
 
               <div className="pt-2">
                 <GlowButton type="submit" disabled={status === 'sending'} className="w-full">
-                  {status === 'sending' ? 'Sending…' : '> SEND_MESSAGE'}
+                  {status === 'sending' ? 'Sending…' : 'Send Message'}
                 </GlowButton>
               </div>
 
-              <div role="status" aria-live="polite" className="min-h-[24px] text-center font-mono text-sm">
+              <div role="status" aria-live="polite" className="min-h-[24px] text-center text-[13px]">
                 {status === 'sent' && (
-                  <span className="text-teal-bright">✓ Message sent — I'll reply within a day or two.</span>
+                  <span className="text-black">Message sent — I'll reply within a day or two.</span>
                 )}
                 {status === 'error' && (
-                  <span className="text-red-400">
+                  <span className="text-black/70">
                     Something went wrong. Please email dids2367@gmail.com directly.
                   </span>
                 )}
               </div>
             </form>
-          </GlassCard>
+          </div>
         </motion.div>
 
-        <div className="pt-8 text-center">
-          <p className="font-mono text-xs text-white/40">© 2026 Dithhi Dasgupta</p>
+        <div className="mt-12 flex flex-col items-center gap-2 border-t border-[rgba(0,0,0,0.12)] pt-8 sm:flex-row sm:justify-between">
+          <p className="text-[13px] text-black/40">© 2026 Dithhi Dasgupta</p>
+          <p className="text-[13px] text-black/40">Biotechnology Engineer · Chennai, India</p>
         </div>
       </div>
     </section>
